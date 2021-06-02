@@ -1,11 +1,13 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: %i[ show update destroy ]
 
   # GET /users
   # GET /users.json
-  # def index
-  #  @users = User.all
-  # end
+   def index
+    @users = User.all
+
+    render json: @users
+   end
 
   # GET /users/1
   # GET /users/1.json
