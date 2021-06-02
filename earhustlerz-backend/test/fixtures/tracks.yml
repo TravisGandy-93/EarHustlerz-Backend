@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  artist: MyString
+  duration: 2021-05-18 06:18:11
+  belongs_to: 
+
+two:
+  title: MyString
+  artist: MyString
+  duration: 2021-05-18 06:18:11
+  belongs_to: 
