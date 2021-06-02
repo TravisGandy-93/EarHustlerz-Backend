@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  resources :albums
+  
   # earhustlerz.com/api/v1
  namespace :api do
    namespace :v1 do
     resources :users
+    resources :albums
    end
  end 
   
