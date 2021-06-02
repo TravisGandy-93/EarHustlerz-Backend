@@ -11,8 +11,9 @@ class Api::V1::UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  # def show
-  # end
+   def show
+      render json: @user
+   end
 
   # POST /users
   # POST /users.json
