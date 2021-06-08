@@ -21,7 +21,14 @@ class Api::V1::SessionsController < ApplicationController
             error: "No one logged in"
           }
         end
-      end
+    end
+
+    def destroy
+        session.clear
+        render json: {
+          notice: "later boss"
+        }, status: :ok
+    end
 
     
 end
