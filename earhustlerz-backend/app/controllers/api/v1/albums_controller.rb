@@ -10,7 +10,7 @@ class Api::V1::AlbumsController < ApplicationController
     else
         @albums = Album.all
 
-        render json: @albums 
+        render json: AlbumSerializer.new(@albums) 
     end
    end
 
