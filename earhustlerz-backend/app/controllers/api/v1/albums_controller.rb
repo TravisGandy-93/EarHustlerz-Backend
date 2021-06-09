@@ -3,9 +3,15 @@ class Api::V1::AlbumsController < ApplicationController
     # GET /albums
   # GET /albums.json
    def index
-    @albums = Album.all
+    if logged_in?
+        @favorites = current_user.favorites
 
-    render json: @albums
+        render json: AlbumSerializer.new(@favorites)
+    else
+        @albums = Album.all
+
+        render json: @albums 
+    end
    end
 
   # GET /albums/1
