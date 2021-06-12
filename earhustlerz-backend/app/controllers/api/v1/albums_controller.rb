@@ -5,12 +5,22 @@ class Api::V1::AlbumsController < ApplicationController
    def index
     if logged_in?
         @favorites = current_user.favorites
-
-        render json: AlbumSerializer.new(@favorites)
-    else
         @albums = Album.all
 
         render json: AlbumSerializer.new(@albums) 
+    end
+   end
+
+   def create
+    @favorite = current_user.favorites.build(favorite_params)
+
+    if @favorite.save
+      render json:  AlbumSerializer.new(@favorite), status: :created
+    else
+      error_resp = {
+        error: @favorite.errors.full_messages.to_sentence
+      }
+      render json: error_resp, status: :unprocessable_entity
     end
    end
 
@@ -21,5 +31,14 @@ class Api::V1::AlbumsController < ApplicationController
       render json: AlbumSerializer.new(@album)
    end
 
- 
+   private
+   # Use callbacks to share common setup or constraints between actions.
+   def set_favorite
+     @favorite = Album.find(params[:id])
+   end
+
+   # Only allow a trusted parameter "white list" through.
+   def favorite_params
+     params.require(:album).permit(:title, :artist, :cover)
+   end
 end
