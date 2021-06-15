@@ -1,5 +1,5 @@
 class Api::V1::AlbumsController < ApplicationController
-
+before_action :set_favorite, only: [:show, :update, :destroy]
     # GET /albums
   # GET /albums.json
    def index
@@ -24,6 +24,18 @@ class Api::V1::AlbumsController < ApplicationController
     end
    end
 
+   def update
+     if @favorite.update(favorite_params)
+      render json:  AlbumSerializer.new(@favorite), status: :ok
+      else
+      error_resp = {
+        error: @favorite.errors.full_messages.to_sentence
+      }
+      render json: error_resp, status: :unprocessable_entity
+      end
+    end
+   
+
   # GET /albums/1
   # GET /albums/1.json
    def show
@@ -39,6 +51,6 @@ class Api::V1::AlbumsController < ApplicationController
 
    # Only allow a trusted parameter "white list" through.
    def favorite_params
-     params.require(:album).permit(:title, :artist, :cover)
+     params.require(:album).permit(:title, :artist, :cover, :genre)
    end
 end
