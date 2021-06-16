@@ -43,6 +43,17 @@ before_action :set_favorite, only: [:show, :update, :destroy]
       render json: AlbumSerializer.new(@album)
    end
 
+   def destroy
+      if @favorite.destroy
+        render json: "Album deleted", status: :ok
+      else
+        error_resp = {
+          error: @favorite.errors.full_messages.to_sentence
+        }
+        render json: error_resp, status: :unprocessable_entity
+      end
+   end
+
    private
    # Use callbacks to share common setup or constraints between actions.
    def set_favorite
