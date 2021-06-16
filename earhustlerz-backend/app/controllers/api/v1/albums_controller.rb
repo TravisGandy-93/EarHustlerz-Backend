@@ -45,7 +45,7 @@ before_action :set_favorite, only: [:show, :update, :destroy]
 
    def destroy
       if @favorite.destroy
-        render json: "Album deleted", status: :ok
+        render json: { data: "Album deleted"}, status: :ok
       else
         error_resp = {
           error: @favorite.errors.full_messages.to_sentence
