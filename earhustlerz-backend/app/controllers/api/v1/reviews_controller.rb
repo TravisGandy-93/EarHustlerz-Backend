@@ -1,5 +1,5 @@
 class Api::V1::ReviewsController < ApplicationController
-
+before_action :set_review, only: [:show]
     def index
         @reviews = Review.all
     
@@ -7,6 +7,8 @@ class Api::V1::ReviewsController < ApplicationController
     end
     
     def create  
+        @review = current_user.reviews.build(review_params)
+    
       if @review.save
         render json:  ReviewSerializer.new(@review), status: :created
       else
@@ -22,5 +24,15 @@ class Api::V1::ReviewsController < ApplicationController
         @review = Review.find(params[:id])
           render json: ReviewSerializer.new(@review)
        end
+
+       private
+
+       def set_review
+        @review = Review.find(params[:id])
+       end
+
+       def review_params
+        params.require(:review).permit(:content, :likes, :dislikes,:album_id)
+      end
     
 end
