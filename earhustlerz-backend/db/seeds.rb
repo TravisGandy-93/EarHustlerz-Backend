@@ -6,6 +6,37 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 travis = User.create(name: "Travis", username: "Fatz Womack", password: "password")
-Album.create(title: "Certified Lover Boy", cover: "https://images.genius.com/803cb1c6daf05ff36a59ca8e...", artist: "Drake", genre: "Rap", user_id: 1)
-Track.create(title: "track 1", artist: "Drake", duration: "2000-01-01 00:05:22.000000000 +0000", album_id: 1)
-Review.create(content: "its a cool little album lol", likes: 1, dislikes: 0, user_id: 1, album_id: 1)
+
+def add_albums(albums: )
+    puts "Adding albums ..."
+    albums.each {|album| Album.create(album)}
+    puts "... Done"
+end
+
+def add_tracks(tracks: )
+    puts "Adding tracks ..."
+    tracks.each {|track| Track.create(track)}
+    puts "... Done"
+end
+
+def add_reviews(reviews: )
+    puts "Adding reviews ..."
+    reviews.each {|review| Review.create(review)}
+    puts "... Done"
+end
+
+def add_photo_albums
+    puts "No photo_albums ..."
+    puts "... Done"
+end
+
+def add_podcasts
+    puts "No podcasts ..."
+    puts "... Done"
+end
+
+add_albums(albums: SeedData::Albums::AUDIO_ALBUMS)
+add_tracks(tracks: SeedData::Tracks::TRACKS)
+add_reviews(reviews: SeedData::Reviews::REVIEWS)
+add_photo_albums
+add_podcasts
