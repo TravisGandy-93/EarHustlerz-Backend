@@ -9,7 +9,10 @@ travis = User.create(name: "Travis", username: "Fatz Womack", password: "passwor
 
 def add_albums(albums: )
     puts "Adding albums ..."
-    albums.each {|album| Album.create(album)}
+    albums.each do |album|
+        Album.create(album)
+        puts "#{album.title} by #{album.artist}"
+    end
     puts "... Done"
 end
 
