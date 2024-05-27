@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title> <%= content_for?(:html_title) ? yield(:html_title) + "Connect" : "Creativez Connect" %></title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_pack_tag 'application' %>
+</head>
+<body>
+  <div id="root">
+    <!-- React components will be rendered here -->
+    <%= render 'layouts/profile_header'%> if params[:controller] == "profiles_controller"
+    <div class="content">
+        <%= yield :javascripts %>
+        <%= yield %>
+    </div>
+  </div>
+</body>
+</html>

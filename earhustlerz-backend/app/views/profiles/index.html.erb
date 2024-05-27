@@ -1,0 +1,7 @@
+<% content_for(:html_title) {"#{current_user.username}'s "} %>
+
+<% render partial: "user_profile" %>
+
+<%= content_for :javascripts do %>
+    <%= javascript_pack_tag 'app'%>
+<% end %>
